@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.Attendance" table="attendance" schema="ssh">
+        <id name="attendId">
+            <column name="attend_id" sql-type="int(10)"/>
+        </id>
+        <property name="employeeId">
+            <column name="employee_id" sql-type="varchar(12)" length="12"/>
+        </property>
+        <property name="aDate">
+            <column name="a_date" sql-type="date"/>
+        </property>
+        <property name="aDesc">
+            <column name="a_desc" sql-type="varchar(50)" length="50" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

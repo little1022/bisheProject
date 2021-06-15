@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.UserinfoEntity" table="userinfo" schema="ssh">
+        <id name="userId">
+            <column name="user_id" sql-type="varchar(12)" length="12"/>
+        </id>
+        <property name="password">
+            <column name="password" sql-type="varchar(32)" length="32"/>
+        </property>
+        <property name="roleId">
+            <column name="role_id" sql-type="int(1)"/>
+        </property>
+        <property name="useBy">
+            <column name="use_by" sql-type="varchar(12)" length="12" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

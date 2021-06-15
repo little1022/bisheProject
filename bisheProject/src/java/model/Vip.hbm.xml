@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.Vip" table="vip" schema="ssh">
+        <id name="vipId">
+            <column name="vip_id" sql-type="varchar(12)" length="12"/>
+        </id>
+        <property name="vipName">
+            <column name="vip_name" sql-type="varchar(50)" length="50"/>
+        </property>
+        <property name="sex">
+            <column name="sex" sql-type="tinyint(1)"/>
+        </property>
+        <property name="birthday">
+            <column name="birthday" sql-type="date" not-null="true"/>
+        </property>
+        <property name="telephone">
+            <column name="telephone" sql-type="varchar(11)" length="11"/>
+        </property>
+        <property name="rewardPoints">
+            <column name="reward_points" sql-type="int(8)" not-null="true"/>
+        </property>
+        <property name="accBalance">
+            <column name="acc_balance" sql-type="int(8)" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

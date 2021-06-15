@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.Vorder" table="vorder" schema="ssh">
+        <id name="vOrderId">
+            <column name="v_order_id" sql-type="varchar(18)" length="18"/>
+        </id>
+        <property name="salonId">
+            <column name="salon_id" sql-type="varchar(4)" length="4"/>
+        </property>
+        <property name="vipId">
+            <column name="vip_id" sql-type="varchar(12)" length="12"/>
+        </property>
+        <property name="vschId">
+            <column name="vsch_id" sql-type="tinyint(1)"/>
+        </property>
+        <property name="cost">
+            <column name="cost" sql-type="int(8)"/>
+        </property>
+    </class>
+</hibernate-mapping>

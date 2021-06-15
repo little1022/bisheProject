@@ -1,0 +1,21 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.Service" table="service" schema="ssh">
+        <id name="serviceId">
+            <column name="service_id" sql-type="tinyint(1)"/>
+        </id>
+        <property name="serviceName">
+            <column name="service_name" sql-type="varchar(50)" length="50"/>
+        </property>
+        <property name="costTime">
+            <column name="cost_time" sql-type="int(8)"/>
+        </property>
+        <property name="serviceDesc">
+            <column name="service_desc" sql-type="varchar(50)" length="50" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+        "http://struts.apache.org/dtds/struts-2.5.dtd">
+
+<struts>
+
+    <!-- 修改常量管理struts 中的action的工程，这个常量的使用，必须引入 spring和struts的整合包，不然spring无法管理struts2 Action 中的实体类-->
+    <constant name="struts.objectFactory" value="spring" />
+    <constant name="struts.devMode" value="false"></constant>
+    <constant name="struts.multipart.maxSize" value="20971520"></constant>
+
+    <!--用户action-->
+    <package name="user" extends="struts-default" namespace="/">
+        <!-- 定义拦截器-->
+        <interceptors>
+            <!--权限拦截器-->
+            <interceptor name="authorityInterceptor" class="interceptor.AuthorityInterceptor"></interceptor>
+        </interceptors>
+
+        <!--配置action-->
+        <!--保存用户-->
+        <action name="user_saveUser" class="userAction" method="saveUser">
+            <!--引用拦截器-->
+            <interceptor-ref name="authorityInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="success" type="redirect">./getUser?page=1</result>
+        </action>
+
+        <!--更新用户-->
+        <action name="user_updateUser" class="userAction" method="updateUser">
+            <!--引用拦截器-->
+            <interceptor-ref name="authorityInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="success">/success.jsp</result>
+        </action>
+
+        <!--展示用户-->
+        <action name="getUser" class="userAction" method="getAllUser">
+            <!--引用拦截器-->
+            <interceptor-ref name="authorityInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+
+            <result name="success">/jsp/allUser.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+
+        <!--删除用户-->
+        <action name="deleteUser" class="userAction" method="deleteUser">
+            <!--引用拦截器-->
+            <interceptor-ref name="authorityInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="success" type="redirect">./getUser?page=1</result>
+        </action>
+
+        <!--查询用户-->
+        <action name="findUserByFuzzy" class="userAction" method="findUserByFuzzy">
+            <!--引用拦截器-->
+            <interceptor-ref name="authorityInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+            <result name="success">/jsp/allUser.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+
+        <!--json查询-->
+        <action name="getUserByFuzzy" class="userAction" method="getUserByFuzzy">
+            <!--引用拦截器-->
+            <interceptor-ref name="authorityInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+
+        </action>
+
+        <!-- 登录-->
+        <action name="doLogin" class="userAction" method="doLogin">
+
+            <result name="success">/jsp/main.jsp</result>
+            <result name="error">/</result>
+        </action>
+        <!--退出-->
+        <action name="logout" class="userAction" method="logout">
+            <result name="success" type="redirect">./isFirstLogin</result>
+        </action>
+
+        <!--第一次登录系统-->
+        <action name="isFirstLogin" class="userAction" method="isFirstLogin">
+            <result name="firstLogin">/jsp/first.jsp</result>
+            <result name="success">/login.jsp</result>
+        </action>
+
+        <!--md5加密工具-->
+        <action name="md5" class="userAction" method="md5">
+            <result name="success">/md5.jsp</result>
+        </action>
+
+        <!-- 跳转店长主页-->
+        <action name="toAdminHome" class="userAction" method="toAdminHomeAction">
+            <!--引用拦截器-->
+            <interceptor-ref name="authorityInterceptor"></interceptor-ref>
+            <interceptor-ref name="defaultStack"></interceptor-ref>
+
+            <result name="success">/success.jsp</result>
+            <result name="error">/login.jsp</result>
+        </action>
+    </package>
+
+    <!--职称action-->
+    <package name="title" extends="struts-default" namespace="/">
+        <action name="title_saveTitle" class="titleAction" method="saveTitle">
+            <result name="success">/success.jsp</result>
+        </action>
+        <action name="showTitle" class="titleAction" method="showTitle">
+            <result name="success" >/jsp/allTitle.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="updateTitle" class="titleAction" method="updateTitle">
+            <result name="success" type="redirect">./showTitle?page=1</result>
+            <result name="input">/index.jsp</result>
+        </action>
+    </package>
+
+    <!--基本信息填报action-->
+    <package name="basic" extends="struts-default" namespace="/">
+
+        <!--保存第一家店铺-->
+        <action name="saveFirstHsalon" class="basicAction" method="saveFirstHsalon">
+            <!--引用拦截器-->
+
+            <result name="success">/success.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+        <!--上传图片-->
+        <action name="uploadImg" class="basicAction" method="uploadImg">
+
+        </action>
+
+        <!--保存第一位职员-->
+        <action name="saveFirstEmployee" class="basicAction" method="saveFirstEmployee">
+            <!--引用拦截器-->
+
+            <result name="success">/success.jsp</result>
+            <result name="error">/fail.jsp</result>
+        </action>
+    </package>
+
+     <package name="vip" extends="struts-default" namespace="/">
+         <action name="showVip" class="vipAction" method="getAllVip">
+             <result name="success">/jsp/allVip.jsp</result>
+             <result name="input">/index.jsp</result>
+         </action>
+         <action name="saveVip" class="vipAction" method="saveVip">
+             <result name="success" type="redirect">./showVip?page=1</result>
+             <result name="input">/index.jsp</result>
+         </action>
+         <action name="updateVip" class="vipAction" method="updateVip">
+             <result name="success" type="redirect">./showVip?page=1</result>
+             <result name="input">/index.jsp</result>
+         </action>
+         <action name="deleteVip" class="vipAction" method="refundVip">
+             <result name="success" type="redirect">./showVip?page=1</result>
+             <result name="input">/index.jsp</result>
+         </action>
+         <action name="depositVip" class="vipAction" method="depositVip">
+             <result name="success" type="redirect">./showVip?page=1</result>
+             <result name="input">/index.jsp</result>
+         </action>
+
+         <action name="getVschePrice" class="vipAction" method="getVschePrice">
+
+         </action>
+
+         <action name="findVipByFuzzy" class="vipAction" method="getVipByFuzzy">
+             <result name="success">/jsp/allVip.jsp</result>
+             <result name="input">/index.jsp</result>
+         </action>
+
+         <action name="bookingVip" class="vipAction" method="bookingVip">
+             <result name="success" type="redirect">./showVip?page=1</result>
+             <result name="input">/index.jsp</result>
+         </action>
+
+         <action name="test" class="vipAction" method="test">
+             <result name="success" type="redirect">./showVip?page=1</result>
+             <result name="input">/index.jsp</result>
+         </action>
+         <action name="showVipScheme" class="vipAction" method="showVipScheme">
+             <result name="success">/jsp/allVipScheme.jsp</result>
+             <result name="input">/index.jsp</result>
+         </action>
+         <action name="showVorder" class="vipAction" method="showVorder">
+             <result name="success">/jsp/allVipOrder.jsp</result>
+             <result name="input">/index.jsp</result>
+         </action>
+     </package>
+
+    <package name="wait" extends="struts-default" namespace="/">
+        <action name="showWait" class="waitAction" method="showAllWait">
+            <result name="success">/jsp/allWait.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="showAllWaitByDate" class="waitAction" method="showAllWaitByDate">
+            <result name="success">/jsp/allWait.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="showAllWaitByStatus" class="waitAction" method="showAllWaitByStatus">
+            <result name="success">/jsp/allWait.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="setSession" class="waitAction" method="setSession">
+
+        </action>
+        <action name="changeStatus" class="waitAction" method="changeStatus">
+            <result name="success" type="redirect">./showWait?page=1</result>
+            <result name="input">/index.jsp</result>
+        </action>
+    </package>
+
+    <package name="employee" extends="struts-default" namespace="/">
+        <action name="getEmployeeByFuzzy" class="employeeAction" method="getEmployeeByFuzzy">
+
+        </action>
+        <action name="setEmployeeSession" class="employeeAction" method="setEmployeeSession">
+
+        </action>
+        <action name="showEmployee" class="employeeAction" method="showAllEmployee">
+            <result name="success">jsp/allEmployee.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="saveEmployee" class="employeeAction" method="saveEmployee">
+            <result name="success" type="redirect">./showEmployee?page=1</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="deleteEmployee" class="employeeAction" method="deleteEmployee">
+            <result name="success" type="redirect">./showEmployee?page=1</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="updateEmployee" class="employeeAction" method="updateEmployee">
+            <result name="success" type="redirect">./showEmployee?page=1</result>
+            <result name="input">/index.jsp</result>
+        </action>
+    </package>
+
+
+    <package name="salon" extends="struts-default" namespace="/">
+        <action name="showSalon" class="hsalonAction" method="showAllSalon">
+            <result name="success">jsp/allSalon.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="setSalonSession" class="hsalonAction" method="setSalonSession">
+
+        </action>
+        <action name="saveSalon" class="hsalonAction" method="saveHsalon">
+            <result name="success" type="redirect">./showSalon?page=1</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="updateSalon" class="hsalonAction" method="updateHsalon">
+            <result name="success" type="redirect">./showSalon?page=1</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="uploadLicense" class="hsalonAction" method="uploadLicense">
+
+        </action>
+        <action name="toPicture" class="hsalonAction" method="toPicture">
+            <result name="success">/picture.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="showPicture" class="hsalonAction" method="showPicture">
+
+        </action>
+    </package>
+
+    <package name="hair" extends="struts-default" namespace="/">
+        <action name="toAccountHair" class="hairAction" method="toAccountHair">
+            <result name="success">/jsp/allOrder.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="accountHair" class="hairAction" method="accountHair">
+            <result name="success">/jsp/allOrder.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="getHairPrice" class="hairAction" method="getHairPrice">
+
+        </action>
+        <action name="getHairVipByFuzzy" class="hairAction" method="getHairVipByFuzzy">
+
+        </action>
+        <action name="getWaitByVipId" class="hairAction" method="getWaitByVipId">
+
+        </action>
+        <action name="showHairProject" class="hairAction" method="showHairProject">
+            <result name="success">/jsp/allHairProject.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+        <action name="showHorder" class="hairAction" method="showHorder">
+            <result name="success">/jsp/allHairOrder.jsp</result>
+            <result name="input">/index.jsp</result>
+        </action>
+    </package>
+
+    <package name="business" extends="struts-default" namespace="/">
+        <action name="business" class="businessAction" method="business">
+            <result name="success">/jsp/business.jsp</result>
+        </action>
+    </package>
+
+</struts>

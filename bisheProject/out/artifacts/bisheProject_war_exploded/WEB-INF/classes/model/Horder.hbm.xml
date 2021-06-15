@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.Horder" table="horder" schema="ssh">
+        <id name="hOrderId">
+            <column name="h_order_id" sql-type="varchar(18)" length="18"/>
+        </id>
+        <property name="vipId">
+            <column name="vip_id" sql-type="varchar(12)" length="12" not-null="true"/>
+        </property>
+        <property name="waitTag">
+            <column name="wait_tag" sql-type="tinyint(1)" not-null="true"/>
+        </property>
+        <property name="employeeId">
+            <column name="employee_id" sql-type="varchar(12)" length="12"/>
+        </property>
+        <property name="hairId">
+            <column name="hair_id" sql-type="tinyint(2)"/>
+        </property>
+        <property name="base">
+            <column name="base" sql-type="int(5)"/>
+        </property>
+        <property name="addition">
+            <column name="addition" sql-type="int(5)" not-null="true"/>
+        </property>
+        <property name="totalCost">
+            <column name="total_cost" sql-type="int(8)"/>
+        </property>
+        <property name="payType">
+            <column name="pay_type" sql-type="tinyint(1)"/>
+        </property>
+        <property name="accDesc">
+            <column name="acc_desc" sql-type="varchar(100)" length="100" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

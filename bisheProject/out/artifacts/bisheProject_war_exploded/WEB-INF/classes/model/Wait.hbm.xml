@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.Wait" table="wait" schema="ssh">
+        <id name="waitId">
+            <column name="wait_id" sql-type="int(10)"/>
+        </id>
+        <property name="waitTime">
+            <column name="wait_time" sql-type="timestamp"/>
+        </property>
+        <property name="vipId">
+            <column name="vip_id" sql-type="varchar(12)" length="12"/>
+        </property>
+        <property name="hairId">
+            <column name="hair_id" sql-type="tinyint(2)"/>
+        </property>
+        <property name="employeeId">
+            <column name="employee_id" sql-type="varchar(12)" length="12" not-null="true"/>
+        </property>
+        <property name="wTag">
+            <column name="w_tag" sql-type="tinyint(1)"/>
+        </property>
+        <property name="salonId">
+            <column name="salon_id" sql-type="varchar(4)" length="4" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

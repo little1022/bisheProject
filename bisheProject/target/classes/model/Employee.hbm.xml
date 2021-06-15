@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.Employee" table="employee" schema="ssh">
+        <id name="employeeId">
+            <column name="employee_id" sql-type="varchar(12)" length="12"/>
+        </id>
+        <property name="employeeName">
+            <column name="employee_name" sql-type="varchar(50)" length="50" not-null="true"/>
+        </property>
+        <property name="sex">
+            <column name="sex" sql-type="varchar(1)" length="1" not-null="true"/>
+        </property>
+        <property name="inDate">
+            <column name="in_date" sql-type="date" not-null="true"/>
+        </property>
+        <property name="telephone">
+            <column name="telephone" sql-type="varchar(11)" length="11" not-null="true"/>
+        </property>
+        <property name="email">
+            <column name="email" sql-type="varchar(50)" length="50" not-null="true"/>
+        </property>
+        <property name="titleId">
+            <column name="title_id" sql-type="tinyint(2)"/>
+        </property>
+        <property name="salonId">
+            <column name="salon_id" sql-type="varchar(4)" length="4"/>
+        </property>
+        <property name="updateTag">
+            <column name="update_tag" sql-type="tinyint(1)" not-null="true"/>
+        </property>
+        <property name="outTag">
+            <column name="out_tag" sql-type="tinyint(1)" not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

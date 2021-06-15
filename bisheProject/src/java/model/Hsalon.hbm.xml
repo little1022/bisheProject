@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="model.Hsalon" table="hsalon" schema="ssh">
+        <id name="salonId">
+            <column name="salon_id" sql-type="varchar(4)" length="4"/>
+        </id>
+        <property name="salonName">
+            <column name="salon_name" sql-type="varchar(50)" length="50"/>
+        </property>
+        <property name="address">
+            <column name="address" sql-type="varchar(50)" length="50"/>
+        </property>
+        <property name="shopkeeper">
+            <column name="shopkeeper" sql-type="varchar(12)" length="12"/>
+        </property>
+        <property name="telephone">
+            <column name="telephone" sql-type="varchar(11)" length="11" not-null="true"/>
+        </property>
+        <property name="email">
+            <column name="email" sql-type="varchar(50)" length="50" not-null="true"/>
+        </property>
+        <property name="license1">
+            <column name="license1" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="license2">
+            <column name="license2" sql-type="varchar(100)" length="100"/>
+        </property>
+        <property name="license3">
+            <column name="license3" sql-type="varchar(100)" length="100"/>
+        </property>
+    </class>
+</hibernate-mapping>
